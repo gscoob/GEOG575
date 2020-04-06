@@ -1,0 +1,170 @@
+/* Stylesheet by Greg Farnsworth, 2019 */
+body {
+    background: url(../img/badlands.jpg) top center no-repeat; 
+    background-size: auto;
+	cursor: url(../img/cursor_wh.ico), context-menu;
+    overflow: hidden;
+}
+
+.flex {
+    height: 500px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+header {
+    display: block;
+    text-align: center;
+}
+
+.headtext {
+    margin: 10px 0 0 0;
+    font-family: sans-serif;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.desctext {
+    margin: 5px 20px 10px 50px;
+    font-family: sans-serif;
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+.insttext {
+    margin: 10px 0 0 0;
+    font-family: sans-serif;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+.map {
+    border: medium solid #999;
+    margin: 10px 0 0 30px;
+    overflow: hidden;
+}
+
+.flavor {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: thick solid #999;
+    margin: 15px 0 0 30px;
+    overflow: hidden;
+    cursor: none;
+}
+
+.lbl {
+    margin: 10px 0 0 35px;
+    overflow: hidden;
+    background-color: rgba(213, 227, 255, 0.9);
+    border: medium solid #999;
+    border-right: 0;
+}
+
+.chart {
+    background-color: rgba(213, 227, 255, 0.85);
+    border: medium solid #999;
+    border-left: 0;
+    margin: 10px 30px 0 0;
+    overflow: hidden;
+}
+
+.countries {
+    fill: #FFF;
+    stroke: #CCC;
+    stroke-width: 2px;
+}
+
+.gratBackground {
+    fill: rgba(213, 227, 255, 0.9);
+}
+
+.gratLines {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+    opacity: 0.8;
+}
+
+.states {
+    stroke: #000;
+    stroke-width: 0.5px;
+    stroke-linecap: round;
+}
+
+.labels {
+    stroke: none;
+    stroke-width: 0.0px;
+    font: small-caps bold 70% Courier, monospace;
+    font-family: "Lucida Console", Courier, monospace;
+    background-color: rgba(250 , 250, 250, 1);
+}
+
+.bar {
+    stroke: none;
+    stroke-width: 0.0px;
+}
+
+.chartTitle {
+    font-family: sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.dropdown {
+    z-index: 10;
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 1px;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 4px #999;
+    position: absolute;
+}
+
+#ddOne {
+    top: 30px;
+}
+
+#ddTwo {
+    top: 70px; 
+}
+
+.titleOption {
+    font-weight: normal;
+    font-style: italic;
+}
+
+.infolabel {
+    position: absolute;
+    height: auto;
+    width: auto;
+    min-width: 100px;
+    color: #fff;
+    background-color: #000;
+    border: solid thin #fff;
+    padding: 5px 10px;
+    top: -75px;
+    z-index: 100;
+}
+
+.infolabel h2 {
+    margin: 10px 0px 15px 10px;
+    padding: 0;
+    display: block;
+    text-align: left;
+    vertical-align: middle;
+    font: bold 100% Verdana, sans-serif;
+}
+
+.infogoo h2 {
+    margin: 0px 10px 10px 25px;
+    padding: 0;
+    display: block;
+    text-align: left;
+    vertical-align: middle;
+    font: bold 100% Verdana, sans-serif;
+}
+
+#inf {
+    font: italic 90% Verdana, sans-serif;
+}
