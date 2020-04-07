@@ -168,3 +168,17 @@ header {
 #inf {
     font: italic 90% Verdana, sans-serif;
 }
+
+.linkBox {
+    fill: white;
+    opacity: 0;
+    cursor: auto;
+    visibility: visible;
+}
+
+.linkTxt {
+    fill: black;
+    font: bold 100% Verdana, sans-serif;
+    z-index: 100;
+    visibility: visible;
+}

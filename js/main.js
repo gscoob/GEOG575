@@ -95,6 +95,7 @@
     
     var wScale;
     var comma = d3.format(",");
+    var linkNPS = "https://www.nps.gov/findapark/index.htm";
 
     
     //begin script when window loads
@@ -155,37 +156,8 @@
             
             createDropdownOne(csvData);
             createDropdownTwo(csvData);
-                        
-            var flavor = d3.select(".flex")
-                .append("svg")
-                .attr("class", "flavor")
-                .attr("width", flavorWidth)
-                .attr("height", flavorHeight);
             
-            // draw a rectangle
-            var flLink = flavor.append("a")
-                .attr("class", "linkTgt")
-                .attr("href", "https://www.nps.gov/index.htm")
-                .attr("target", "_blank")
-                .append("rect") 
-                .attr("class", "linkBox")
-                .attr("x", 0)
-                .attr("y", 0)
-                .style("fill", "white")
-                .attr("height", flavorHeight)
-                .attr("width", flavorWidth);
-
-            // draw text on the screen
-            var flText = flavor.append("text")
-                .attr("x", flavorWidth/2)
-                .attr("y", flavorHeight/2)
-                .style("fill", "black")
-                .style("font-size", "20px")
-                .attr("dy", ".35em")
-                .attr("text-anchor", "middle")
-                .style("pointer-events", "none")
-                .text("Explore the National Park Service!")
-                .attr("class", "linkTxt");
+            setFlavorBox(csvData);
 
             //add coordinated visualization to the map
             setLabelChart(csvData, colorScale);
@@ -617,7 +589,7 @@
     
     //function to highlight enumeration units and bars
     function highlight(props){
-        
+                    console.log("inside highlight "+linkNPS); 
         //change stroke
         var selected = d3.selectAll("." + props.geo_id)
             .style("stroke", "blue")
@@ -667,7 +639,12 @@
             var infoValue = comma(parseFloat(props[expressed]).toFixed(i));
             var infoAcres = comma(props[displayed]);
         }
-    
+        
+        console.log("inside infobox "+linkNPS);
+        console.log("props.link "+props.link)
+        var linkNPS = props.link;
+        console.log("after update "+linkNPS); 
+        
         var infoDesc2 = "Acreage " + drop2Choice;
         var infoDesc1 = "Total Acreage of " + drop1Choice;
         
@@ -720,15 +697,38 @@
     };
     
         //function to create dynamic label
-    function setFlavorbox(props){
-        
-        var flavorText = "NPS Highlights in " + props.geo_name + " include " + props.place;
-  //      var flavorLink = props.link;
-        
-        //create info label div
-        d3.select(".linkTgt").attr("href", props.link);
-        d3.select(".linkTxt").attr("text", flavorText);
+    function setFlavorBox(csvData){
+                          
+        var flavor = d3.select(".flex")
+            .append("svg")
+            .attr("class", "flavor")
+            .attr("width", flavorWidth)
+            .attr("height", flavorHeight);
 
+        // draw a rectangle
+        var flLink = flavor.append("rect") 
+            .attr("class", "linkBox")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("height", flavorHeight)
+            .attr("width", flavorWidth)
+            .on("click", goLink);
+
+        // draw text on the screen
+        var flText = flLink.append("text")
+            .attr("class", "linkTxt")
+            .attr("x", flavorWidth/2)
+            .attr("y", flavorHeight/2)
+            .attr("dy", ".35em")
+            .attr("text-anchor", "middle")
+            .text("Explore the National Park Service!");
+    };
+    
+    function goLink(){
+     
+        console.log("on click "+linkNPS); 
+
+        window.open(linkNPS);
     };
     
 })(); //last line of main.js
