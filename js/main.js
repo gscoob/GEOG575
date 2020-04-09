@@ -103,7 +103,7 @@
 
     //set up choropleth map
     function setPage(){
-
+        
         d3.select("body").style("background-size", window.innerWidth+"px "+window.innerHeight+"px");
         d3.select(".flex").style("height", window.innerHeight+"px");
         
@@ -595,14 +595,18 @@
     
     //function to highlight enumeration units and bars
     function highlight(props){
-                    console.log("inside highlight "+linkNPS); 
+
         //change stroke
         var selected = d3.selectAll("." + props.geo_id)
             .style("stroke", "blue")
             .style("stroke-width", "2");
         
         var newTxt = "NPS Highlights in " + props.geo_name + " include: " + props.place;
-        d3.select(".linkTxt").text(newTxt);
+        d3.select(".linkTxt")
+            .attr("x", 20)
+            .attr("y", flavorHeight/1.5)
+            .attr("text-anchor", "start")
+            .text(newTxt);
         
         setInfobox(props);
     };
@@ -610,7 +614,11 @@
     //function to reset the element style on mouseout
     function dehighlight(props){
         
-        d3.select(".linkTxt").text("Explore the National Park Service!");
+        d3.select(".linkTxt")
+            .attr("x", flavorWidth/2)
+            .attr("y", flavorHeight/1.5)
+            .attr("text-anchor", "middle")
+            .text("Explore the National Park Service!");
         
         d3.select(".infolabel")
             .remove();
@@ -656,7 +664,7 @@
         //label content
         var infoAttribute1 = '<h2><span id="inf">' + infoDesc1 + ': </span> ' + infoAcres + '</h2>';
         var infoAttribute2 = '<h2><span id="inf">' + infoDesc2 + ': </span> ' + infoValue + '</h2>';
-        var stateName = '<h2>' + props.geo_name + '</h2>          Click to visit the NPS website!';
+        var stateName = '<h2>' + props.geo_name + '</h2>';
         
         //create info label div
         var infolabel = d3.select("body")
@@ -729,5 +737,28 @@
 
         window.open(linkNPS);
     };
+    
+    
+    function cycleBackgrounds() {
+        var index = 0;
+
+        $imageEls = $('.toggle-image'); // Get the images to be cycled.
+
+        setInterval(function () {
+            // Get the next index.  If at end, restart to the beginning.
+            index = index + 1 < $imageEls.length ? index + 1 : 0;
+            // Show the next image.
+            $imageEls.eq(index).addClass('show');
+            // Hide the previous image.
+            $imageEls.eq(index - 1).removeClass('show');
+
+        }, 8000);
+    };
+
+    // Document Ready.
+    $(function () {
+        cycleBackgrounds();
+    });
+    
     
 })(); //last line of main.js
