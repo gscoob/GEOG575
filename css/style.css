@@ -10,6 +10,12 @@ body {
     height: 500px;
     display: flex;
     flex-flow: column wrap;
+    cursor: inherit;
+}
+
+.flavor {
+    cursor: inherit;
+    pointer-events: none;
 }
 
 header {
@@ -172,13 +178,19 @@ header {
 .linkBox {
     fill: white;
     opacity: 0;
-    cursor: auto;
+    cursor: inherit;
     visibility: visible;
 }
 
 .linkTxt {
-    fill: black;
-    font: bold 100% Verdana, sans-serif;
-    z-index: 100;
-    visibility: visible;
+    cursor: inherit;
+    fill: Green;
+    stroke: none;
+    stroke-width: 0.25px;
+    font: normal 100% Verdana, sans-serif;
+    font-stretch: expanded;
+/*    text-decoration: underline;  */
+    opacity: 1.0;
+    font-size: 1.5em;
+    pointer-events: none;   
 }

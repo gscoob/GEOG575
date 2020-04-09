@@ -33,7 +33,7 @@
                      "pctPreserve",
                      "pctOther",
                      "place",
-                     "link"
+                     "linked"
                     ],
         procArray = [   ["normTotal",
                          "normPark",
@@ -125,7 +125,7 @@
             .projection(projection);
 
         d3.queue()
-            .defer(d3.csv, "data/dataNationalParks_BLANK.csv") //load attributes from csv
+            .defer(d3.csv, "data/dataNationalParks.csv") //load attributes from csv
             .defer(d3.json, "data/Country.topojson") //load background spatial data
             .defer(d3.json, "data/State.topojson") //load choropleth spatial data
             .await(callback);
@@ -157,7 +157,7 @@
             createDropdownOne(csvData);
             createDropdownTwo(csvData);
             
-            setFlavorBox(csvData);
+            setFlavorBox();
 
             //add coordinated visualization to the map
             setLabelChart(csvData, colorScale);
@@ -237,6 +237,9 @@
             })
             .on("mouseout", function(d){
                 dehighlight(d.properties);
+            })
+            .on("click", function(d){
+                goLink(d.properties.linked);
             })
             .on("mousemove", moveInfobox);
         
@@ -401,7 +404,10 @@
             .attr("height", chartHeight / csvData.length - 1)
             .on("mouseover", highlight)
             .on("mouseout", dehighlight)
-            .on("mousemove", moveInfobox);
+            .on("mousemove", moveInfobox)            
+            .on("click", function(d){
+                goLink(d.linked);
+            });
 
         var desc = bars.append("desc")
             .text('{"stroke": "none", "stroke-width": "0px"}');
@@ -595,12 +601,16 @@
             .style("stroke", "blue")
             .style("stroke-width", "2");
         
+        var newTxt = "NPS Highlights in " + props.geo_name + " include: " + props.place;
+        d3.select(".linkTxt").text(newTxt);
+        
         setInfobox(props);
-//        setFlavorbox(props);
     };
     
     //function to reset the element style on mouseout
     function dehighlight(props){
+        
+        d3.select(".linkTxt").text("Explore the National Park Service!");
         
         d3.select(".infolabel")
             .remove();
@@ -639,19 +649,14 @@
             var infoValue = comma(parseFloat(props[expressed]).toFixed(i));
             var infoAcres = comma(props[displayed]);
         }
-        
-        console.log("inside infobox "+linkNPS);
-        console.log("props.link "+props.link)
-        var linkNPS = props.link;
-        console.log("after update "+linkNPS); 
-        
+
         var infoDesc2 = "Acreage " + drop2Choice;
         var infoDesc1 = "Total Acreage of " + drop1Choice;
         
         //label content
         var infoAttribute1 = '<h2><span id="inf">' + infoDesc1 + ': </span> ' + infoAcres + '</h2>';
         var infoAttribute2 = '<h2><span id="inf">' + infoDesc2 + ': </span> ' + infoValue + '</h2>';
-        var stateName = '<h2>' + props.geo_name + '</h2>';
+        var stateName = '<h2>' + props.geo_name + '</h2>          Click to visit the NPS website!';
         
         //create info label div
         var infolabel = d3.select("body")
@@ -696,8 +701,8 @@
             .style("top", y + "px");
     };
     
-        //function to create dynamic label
-    function setFlavorBox(csvData){
+    //function to create dynamic label
+    function setFlavorBox(){
                           
         var flavor = d3.select(".flex")
             .append("svg")
@@ -711,22 +716,16 @@
             .attr("x", 0)
             .attr("y", 0)
             .attr("height", flavorHeight)
-            .attr("width", flavorWidth)
-            .on("click", goLink);
-
-        // draw text on the screen
-        var flText = flLink.append("text")
+            .attr("width", flavorWidth);
+        var flText = flavor.append("text")
             .attr("class", "linkTxt")
             .attr("x", flavorWidth/2)
-            .attr("y", flavorHeight/2)
-            .attr("dy", ".35em")
+            .attr("y", flavorHeight/1.5)
             .attr("text-anchor", "middle")
             .text("Explore the National Park Service!");
     };
-    
-    function goLink(){
-     
-        console.log("on click "+linkNPS); 
+      
+    function goLink(linkNPS){
 
         window.open(linkNPS);
     };
