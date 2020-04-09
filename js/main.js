@@ -119,7 +119,7 @@
               .parallels([32, 45])
               .rotate([91.15, 0])
               .center([0, 41.5])
-              .scale(1100);
+              .scale(1000);
 
         var path = d3.geoPath()
             .projection(projection);
