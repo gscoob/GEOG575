@@ -182,16 +182,42 @@ header {
     visibility: visible;
 }
 
-.linkTxt {
+.linkTxt1 {
     cursor: inherit;
-    fill: Green;
+    fill: Blue;
     stroke: none;
-    stroke-width: 0.25px;
-    font: normal 100% Verdana, sans-serif;
+/*    stroke-width: 0.25px;  */
+    font: normal 110% Verdana, sans-serif;
     font-stretch: expanded;
 /*    text-decoration: underline;  */
     opacity: 1.0;
-    font-size: 1.2em;
+ /*   font-size: 0.8em;  */
+    pointer-events: none;   
+}
+
+.linkTxt2 {
+    cursor: inherit;
+    fill: Green;
+    stroke: none;
+/*    stroke-width: 0.25px;  */
+    font: normal 90% Verdana, sans-serif;
+    font-stretch: expanded;
+/*    text-decoration: underline;  */
+    opacity: 1.0;
+ /*   font-size: 0.8em;  */
+    pointer-events: none;   
+}
+
+.linkTxt3 {
+    cursor: inherit;
+    fill: Green;
+    stroke: none;
+/*    stroke-width: 0.25px;  */
+    font: normal 90% Verdana, sans-serif;
+    font-stretch: expanded;
+/*    text-decoration: underline;  */
+    opacity: 1.0;
+ /*   font-size: 0.8em;  */
     pointer-events: none;   
 }
 

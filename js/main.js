@@ -107,6 +107,8 @@
         d3.select("body").style("background-size", window.innerWidth+"px "+window.innerHeight+"px");
         d3.select(".flex").style("height", window.innerHeight+"px");
         
+        setFlavorBox();
+        
         //create new svg container for the map
         var map = d3.select(".flex")
             .append("svg")
@@ -156,8 +158,6 @@
             
             createDropdownOne(csvData);
             createDropdownTwo(csvData);
-            
-            setFlavorBox();
 
             //add coordinated visualization to the map
             setLabelChart(csvData, colorScale);
@@ -601,12 +601,15 @@
             .style("stroke", "blue")
             .style("stroke-width", "2");
         
-        var newTxt = "NPS Highlights in " + props.geo_name + " include: " + props.place;
-        d3.select(".linkTxt")
-            .attr("x", 20)
-            .attr("y", flavorHeight/1.5)
-            .attr("text-anchor", "start")
-            .text(newTxt);
+        var newTxt = "Highlights of the National Park System in " + props.geo_name + " include:";
+        d3.select(".linkTxt1")
+            .text("Highlights of the National Park System");
+        d3.select(".linkTxt2")
+            .attr("x", flavorWidth/2)
+            .attr("y", 50)
+            .text(props.geo_name + ": " + props.place);
+        d3.select(".linkTxt3")
+            .text("");
         
         setInfobox(props);
     };
@@ -614,11 +617,13 @@
     //function to reset the element style on mouseout
     function dehighlight(props){
         
-        d3.select(".linkTxt")
-            .attr("x", flavorWidth/2)
-            .attr("y", flavorHeight/1.5)
-            .attr("text-anchor", "middle")
-            .text("Explore the National Park Service!");
+//        d3.select(".linkTxt")
+//            .attr("x", flavorWidth/2)
+//            .attr("y", flavorHeight/1.5)
+//            .attr("text-anchor", "middle")
+//            .text("Explore the National Park Service!");
+        
+        setFlavorText();
         
         d3.select(".infolabel")
             .remove();
@@ -726,12 +731,33 @@
             .attr("height", flavorHeight)
             .attr("width", flavorWidth);
         var flText = flavor.append("text")
-            .attr("class", "linkTxt")
-            .attr("x", flavorWidth/2)
-            .attr("y", flavorHeight/1.5)
-            .attr("text-anchor", "middle")
-            .text("Explore the National Park Service!");
+            .attr("class", "linkTxt1");
+        var flText = flavor.append("text")
+            .attr("class", "linkTxt2");
+        var flText = flavor.append("text")
+            .attr("class", "linkTxt3");
+        
+        setFlavorText();
     };
+    
+    function setFlavorText(){
+        d3.select(".linkTxt1")
+            .attr("x", flavorWidth/2)
+            .attr("y", 25)
+            .attr("text-anchor", "middle")
+            .text("Explore the National Park System!")
+        d3.select(".linkTxt2")
+            .attr("x", flavorWidth/2)
+            .attr("y", 43)
+            .attr("text-anchor", "middle")
+            .text("Use the dropdown menus below to change the data view represented on the map.")
+        d3.select(".linkTxt3")
+            .attr("x", flavorWidth/2)
+            .attr("y", 58)
+            .attr("text-anchor", "middle")
+            .text("Then mouse-over a state for more info, or click to visit the state's NPS website.");
+        
+    }
       
     function goLink(linkNPS){
 
