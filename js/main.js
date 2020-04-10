@@ -607,6 +607,7 @@
         d3.select(".linkTxt2")
             .attr("x", flavorWidth/2)
             .attr("y", 50)
+            .style("font-size", "1.25em")
             .text(props.geo_name + ": " + props.place);
         d3.select(".linkTxt3")
             .text("");
@@ -750,6 +751,7 @@
             .attr("x", flavorWidth/2)
             .attr("y", 43)
             .attr("text-anchor", "middle")
+            .style("font-size", "0.9em")
             .text("Use the dropdown menus below to change the data view represented on the map.")
         d3.select(".linkTxt3")
             .attr("x", flavorWidth/2)

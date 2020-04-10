@@ -204,7 +204,7 @@ header {
     font-stretch: expanded;
 /*    text-decoration: underline;  */
     opacity: 1.0;
- /*   font-size: 0.8em;  */
+    font-size: 1em;  
     pointer-events: none;   
 }
 
